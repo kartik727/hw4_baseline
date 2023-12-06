@@ -86,6 +86,25 @@ public class ExpenseTrackerModel {
       return true;
   }
 
+  /**
+   * Unregisters the given ExpenseTrackerModelListener from
+   * state change events.
+   *
+   * @param listener The ExpenseTrackerModelListener to be unregistered
+   * @return If the listener is non-null and registered, returns true.
+   *         If not, returns false.
+   */
+  public boolean unregister(ExpenseTrackerModelListener listener) {
+      if (listener == null) {
+        return false;
+      }
+      if (!listeners.contains(listener)) {
+        return false;
+      }
+      listeners.remove(listener);
+      return true;
+    }
+
   public int numberOfListeners() {
       // For testing, this is one of the methods.
       return listeners.size();
