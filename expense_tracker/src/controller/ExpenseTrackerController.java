@@ -45,7 +45,7 @@ public class ExpenseTrackerController {
     
     Transaction t = new Transaction(amount, category);
     model.addTransaction(t);
-    view.update(model);
+    // view.update(model);
     return true;
   }
 
@@ -63,7 +63,7 @@ public class ExpenseTrackerController {
         }
       }
       model.setMatchedFilterIndices(rowIndexes);
-      view.update(model);
+      // view.update(model);
     }
     else{
       JOptionPane.showMessageDialog(view, "No filter applied");

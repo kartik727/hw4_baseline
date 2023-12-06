@@ -28,12 +28,14 @@ public class ExpenseTrackerModel {
     transactions.add(t);
     // The previous filter is no longer valid.
     matchedFilterIndices.clear();
+    stateChanged();
   }
 
   public void removeTransaction(Transaction t) {
     transactions.remove(t);
     // The previous filter is no longer valid.
     matchedFilterIndices.clear();
+    stateChanged();
   }
 
   public List<Transaction> getTransactions() {
@@ -44,16 +46,17 @@ public class ExpenseTrackerModel {
   public void setMatchedFilterIndices(List<Integer> newMatchedFilterIndices) {
       // Perform input validation
       if (newMatchedFilterIndices == null) {
-	  throw new IllegalArgumentException("The matched filter indices list must be non-null.");
+	      throw new IllegalArgumentException("The matched filter indices list must be non-null.");
       }
       for (Integer matchedFilterIndex : newMatchedFilterIndices) {
-	  if ((matchedFilterIndex < 0) || (matchedFilterIndex > this.transactions.size() - 1)) {
-	      throw new IllegalArgumentException("Each matched filter index must be between 0 (inclusive) and the number of transactions (exclusive).");
-	  }
+	      if ((matchedFilterIndex < 0) || (matchedFilterIndex > this.transactions.size() - 1)) {
+	        throw new IllegalArgumentException("Each matched filter index must be between 0 (inclusive) and the number of transactions (exclusive).");
+	      }
       }
       // For encapsulation, copy in the input list 
       this.matchedFilterIndices.clear();
       this.matchedFilterIndices.addAll(newMatchedFilterIndices);
+      stateChanged();
   }
 
   public List<Integer> getMatchedFilterIndices() {
